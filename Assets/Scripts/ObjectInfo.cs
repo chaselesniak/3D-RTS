@@ -46,22 +46,21 @@ public class ObjectInfo : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
-        {
-            if (hit.collider.tag == "Ground")
+        
+            if (Physics.Raycast(ray, out hit, 100))
             {
-                agent.destination = hit.point;
+                if (hit.collider.tag == "Ground")
+                {
+                    agent.destination = hit.point;
 
+                }
+                else if (hit.collider.tag == "Resource")
+                {
+                    agent.destination = hit.collider.gameObject.transform.position;
+                    Debug.Log("Harvesting");
+                    isSelected = false;
+                }
             }
-            else if (hit.collider.tag == "Resource")
-            {
-                agent.destination = hit.collider.gameObject.transform.position;
-                Debug.Log("Harvesting");
-            }
-        }
-
-
-
     }
 
 
