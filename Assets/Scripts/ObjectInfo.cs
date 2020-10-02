@@ -37,7 +37,10 @@ public class ObjectInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(1) && isSelected)
+        {
+            RightClick();
+        }
         if (targetNode == null)
         {
             if(heldResource != 0)
@@ -50,6 +53,7 @@ public class ObjectInfo : MonoBehaviour
             else
             {
                 task = TaskList.Idle;
+                
             }
         }
         if (heldResource >= maxHeldResource && isGathering)
@@ -60,10 +64,7 @@ public class ObjectInfo : MonoBehaviour
             drops = null;
             task = TaskList.Delivering;
         }
-        if (Input.GetMouseButtonDown(1) && isSelected)
-        {
-            RightClick();
-        }
+        
     }
 
 
