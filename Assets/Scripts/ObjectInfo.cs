@@ -96,24 +96,23 @@ public class ObjectInfo : MonoBehaviour
     public void RightClick()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        
-            if (Physics.Raycast(ray, out hit, 100))
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100))
+        {
+            if (hit.collider.CompareTag("Ground"))
             {
-                if (hit.collider.tag == "Ground")
-                {
-                    agent.destination = hit.point;
-                    task = TaskList.Moving;
-                }
-                else if (hit.collider.tag == "Resource")
-                {
-                    agent.destination = hit.collider.gameObject.transform.position;
-                    Debug.Log("Harvesting");
-                    task = TaskList.Gathering;
-                    targetNode = hit.collider.gameObject;
-                    isSelected = false;
-                }
+                agent.destination = hit.point;
+                task = TaskList.Moving;
             }
+            else if (hit.collider.CompareTag("Resource"))
+            {
+                agent.destination = hit.collider.gameObject.transform.position;
+                Debug.Log("Harvesting");
+                task = TaskList.Gathering;
+                targetNode = hit.collider.gameObject;
+                isSelected = false;
+            }
+        }
     }
 
 

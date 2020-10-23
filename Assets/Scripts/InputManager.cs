@@ -47,10 +47,12 @@ public class InputManager : MonoBehaviour
         //changed rayCast methods from 3 parameter with a maxDistance to 2 with no max distance
         if(Physics.Raycast(ray, out hit))
         {  
-                //displays in log name of object ray hits
-                Debug.Log(hit.collider.name);
+            //displays in log name of object ray hits
+            Debug.Log(hit.collider.name);
+            Debug.Log("Collision");
+
             
-            if(hit.collider.tag == "Ground")
+            if(hit.collider.CompareTag("Ground"))
             {
                 if (selectedInfo != null && selectedInfo.isSelected)
                 {
@@ -59,7 +61,7 @@ public class InputManager : MonoBehaviour
                     Debug.Log("Deselected");
                 }
             }
-            else if(hit.collider.tag == "Selectable")
+            else if (hit.collider.CompareTag("Selectable"))
             {
                 selectedObject = hit.collider.gameObject;
                 selectedInfo = selectedObject.GetComponent<ObjectInfo>();
@@ -124,4 +126,6 @@ public class InputManager : MonoBehaviour
             Camera.main.transform.eulerAngles = Vector3.MoveTowards(origin, destination, Time.deltaTime * rotateSpeed);
         }
     }
+
+    
 }
