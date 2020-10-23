@@ -119,13 +119,13 @@ public class ObjectInfo : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         GameObject hitObject = other.gameObject;
-        if (hitObject.tag == "Resource" && task == TaskList.Gathering)
+        if (hitObject.CompareTag("Resource") && task == TaskList.Gathering)
         {
             isGathering = true;
             hitObject.GetComponent<NodeManager>().gatherers++;
             heldResourceType = hitObject.GetComponent<NodeManager>().resourceType;
             
-        }else if(hitObject.tag == "Drops" && task == TaskList.Delivering)
+        }else if(hitObject.CompareTag("Drops") && task == TaskList.Delivering)
         {
             if(RM.Gold >= RM.maxGold)
             {
@@ -148,7 +148,7 @@ public class ObjectInfo : MonoBehaviour
     {
         GameObject hitObject = other.gameObject;
 
-        if (hitObject.tag == "Resource")
+        if (hitObject.CompareTag( "Resource"))
         {
             hitObject.GetComponent<NodeManager>().gatherers--;
             isGathering = false;
